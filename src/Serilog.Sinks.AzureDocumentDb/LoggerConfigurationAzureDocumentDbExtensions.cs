@@ -104,7 +104,7 @@ namespace Serilog
             string collectionName = "Logs",
             LogEventLevel restrictedToMinimumLevel = LevelAlias.Minimum,
             IFormatProvider formatProvider = null,
-            bool storeTimestampInUtc = false,
+            bool storeTimestampInUtc = true,
             string connectionProtocol = "https",
             int? timeToLive = null)
         {

@@ -15,6 +15,7 @@
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using Serilog.Events;
@@ -53,10 +54,10 @@ namespace Serilog.Sinks.Extensions
 
             eventObject.Add("EventIdHash", ComputeMessageTemplateHash(messageTemplateText));
             eventObject.Add("Timestamp", storeTimestampInUtc
-                ? logEvent.Timestamp.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss.fffzzz")
+                ? logEvent.Timestamp.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ", CultureInfo.InvariantCulture)
                 : logEvent.Timestamp.ToString("yyyy-MM-dd HH:mm:ss.fffzzz"));
 
-            eventObject.Add("Level", logEvent.Level.ToString());
+            eventObject.Add("Level", logEvent.Level);
             eventObject.Add("Message", logEvent.RenderMessage(formatProvider));
             eventObject.Add("MessageTemplate", messageTemplateText);
 
